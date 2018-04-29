@@ -30,7 +30,7 @@ public class SignIn extends HttpServlet {
 	            String sql = "SELECT * FROM users WHERE email = ?";
 	            Class.forName("com.mysql.jdbc.Driver");
 	
-	            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud","root","lorena19");
+	            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud","root","mysql");
 	            ps = conn.prepareStatement(sql);
 	            ps.setString(1,email);
 	            ResultSet rs = ps.executeQuery();

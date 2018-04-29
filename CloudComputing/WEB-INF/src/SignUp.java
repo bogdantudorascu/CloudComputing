@@ -35,7 +35,7 @@ public class SignUp extends HttpServlet {
             String sql = "INSERT INTO users(email,username,password) VALUES (?,?,?)";
             Class.forName("com.mysql.jdbc.Driver");
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud","root","lorena19");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud","root","mysql");
             ps = conn.prepareStatement(sql);
             ps.setString(1,email);
             ps.setString(2,username);

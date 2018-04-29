@@ -32,7 +32,7 @@ public class Profile extends HttpServlet {
 	
 	            Class.forName("com.mysql.jdbc.Driver");
 	
-	            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud","root","lorena19");
+	            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud","root","mysql");
 	            ps = conn.prepareStatement(sql);
 	            ps.setString(1,session.getAttribute("id").toString());
 	            
@@ -103,7 +103,7 @@ public class Profile extends HttpServlet {
 	
 	            Class.forName("com.mysql.jdbc.Driver");
 	
-	            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud","root","lorena19");
+	            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud","root","mysql");
 	            ps = conn.prepareStatement(sql);
 	            ps.setString(1,securedPassword);
 	            ps.setString(2,session.getAttribute("username").toString());
