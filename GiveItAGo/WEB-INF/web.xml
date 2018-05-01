@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Give It A Go</display-name>
+  <servlet>
+    <servlet-name>EventController</servlet-name>
+    <servlet-class>com.sheffield.giveitago.controllers.EventController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CreateEventController</servlet-name>
+    <servlet-class>com.sheffield.giveitago.controllers.CreateEventController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowEventController</servlet-name>
+    <servlet-class>com.sheffield.giveitago.controllers.ShowEventController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EventController</servlet-name>
+    <url-pattern></url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CreateEventController</servlet-name>
+    <url-pattern>/Create</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>ShowEventController</servlet-name>
+    <url-pattern>/Event/*</url-pattern>
+  </servlet-mapping>
+  
+  <listener>
+    <listener-class>com.sheffield.giveitago.listener.AppContextListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>dbUser</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbPass</param-name>
+    <param-value>mysql</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbURL</param-name>
+    <param-value>jdbc:mysql://localhost:3306/cloud</param-value>
+  </context-param>
+  <context-param>
+    <param-name>uploadPath</param-name>
+    <param-value>upload</param-value>
+  </context-param>
+</web-app>
