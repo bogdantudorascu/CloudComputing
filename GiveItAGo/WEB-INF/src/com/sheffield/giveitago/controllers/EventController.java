@@ -40,6 +40,9 @@ public class EventController extends HttpServlet {
 		Connection con = db.getConnection();
 		HttpSession session = request.getSession();
 
+		String applicationPath = request.getServletContext().getContextPath();
+		String filePath = applicationPath + '/' + (String) getServletContext().getInitParameter("uploadPath");
+		
 		String query = "SELECT * FROM event";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
@@ -50,8 +53,8 @@ public class EventController extends HttpServlet {
 				event.setId(rs.getInt(1));
 				event.setName(rs.getString(2));
 				event.setDescription(rs.getString(3));
-				event.setPhoto(rs.getString(4));
-				event.setCreated_at(rs.getTimestamp(5));
+				event.setPhoto(filePath + "/" + rs.getString(4));
+				event.setDate(rs.getDate(7));
 				data.add(event);
 			}
 			

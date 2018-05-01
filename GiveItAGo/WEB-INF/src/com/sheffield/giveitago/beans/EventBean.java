@@ -1,17 +1,20 @@
 package com.sheffield.giveitago.beans;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
  * Bean implementation class Event
  */
+@SuppressWarnings("serial")
 public class EventBean implements Serializable {
 	
 	private int id;
 	private String name;
     private String description;
     private String photo;
+    private Date date;
     private Timestamp created_at;
     
     /**
@@ -70,6 +73,20 @@ public class EventBean implements Serializable {
 		this.photo = photo;
 	}
 	
+	/**
+	 * @return the date
+	 */
+	public Date getDate() {
+		return date;
+	}
+
+	/**
+	 * @param date the date to set
+	 */
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	/**
 	 * @return the created_at
 	 */

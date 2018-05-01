@@ -19,11 +19,11 @@
 			<c:otherwise>
 				<h1>Event Detail</h1>
 				<div class="row">
-					<div class="col-5"><img src="${data.photo}" class="img-fluild" alt="event-image"></div>
-					<div class="col-7">
+					<div class="col-4"><img src="${data.photo}" class="img-fluild img-thumbnail event-img" alt="event-image"></div>
+					<div class="col-8">
 						<h2>${data.name}</h2>
-						<h3 class="mb-2 text-muted">Date created: <fmt:formatDate pattern="dd/MM/yyyy" value="${data.created_at}" /></h3>
-						<p>${data.description}</p>
+						<h4 class="mb-2 text-muted">Event date: <fmt:formatDate pattern="dd/MM/yyyy" value="${data.date}" /></h3>
+						<p class="event-description">${data.description}</p>
 					</div>
 				</div>
 			</c:otherwise>

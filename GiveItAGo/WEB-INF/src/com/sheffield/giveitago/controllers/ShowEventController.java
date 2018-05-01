@@ -1,6 +1,5 @@
 package com.sheffield.giveitago.controllers;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,8 +40,8 @@ public class ShowEventController extends HttpServlet {
 		Connection con = db.getConnection();
 		HttpSession session = request.getSession();
 		
-		String applicationPath = request.getServletContext().getRealPath("");
-		String filePath = applicationPath + (String) getServletContext().getInitParameter("uploadPath");
+		String applicationPath = request.getServletContext().getContextPath();
+		String filePath = applicationPath + '/' + (String) getServletContext().getInitParameter("uploadPath");
 		
 		String id = request.getPathInfo().substring(1);
 		if (isInt(id) == true) {
@@ -58,9 +57,9 @@ public class ShowEventController extends HttpServlet {
 						event.setName(rs.getString(2));
 						event.setDescription(rs.getString(3));
 						event.setPhoto(filePath + "/" + rs.getString(4));
-						event.setCreated_at(rs.getTimestamp(5));
+						event.setDate(rs.getDate(7));
 					} while (rs.next());
-					
+					System.out.println(event.getDate());
 					session.setAttribute("data", event);
 				} else {
 					session.setAttribute("error", "Event not found!");

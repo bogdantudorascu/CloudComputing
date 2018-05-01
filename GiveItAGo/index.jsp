@@ -23,10 +23,16 @@
 				<c:forEach items="${data}" var="event">
 					<div class="card my-3">
 					  <div class="card-body">
-					    <h5 class="card-title">${event.name}</h5>
-					    <h6 class="card-subtitle mb-2 text-muted"><fmt:formatDate pattern="dd/MM/yyyy" value="${event.created_at}" /></h6>
-					    <p class="card-text">${event.photo}</p>
-					    <a href="#" class="card-link">Detail</a>
+					  	<div class="row">
+					  		<div class="col-2">
+					  			<img src="${event.photo}" class="img-fluild img-thumbnail event-img-small" alt="event-image">
+					  		</div>
+					  		<div>
+							    <h3 class="card-title">${event.name}</h3>
+							    <h6 class="card-subtitle mb-2 text-muted">Date: <fmt:formatDate pattern="dd/MM/yyyy" value="${event.date}" /></h6>
+							    <a href="/GiveItAGo/Event/${event.id}" class="card-link">Detail</a>
+					  		</div>
+					  	</div>
 					  </div>
 					</div>
 				</c:forEach>

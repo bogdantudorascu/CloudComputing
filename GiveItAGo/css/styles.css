@@ -1,0 +1,13 @@
+.event-img {
+	width: 400px;
+	height: 300px;
+}
+
+.event-img-small {
+	width: 180px;
+	height: 180px
+}
+
+.event-description {
+	white-space: pre-line;
+}

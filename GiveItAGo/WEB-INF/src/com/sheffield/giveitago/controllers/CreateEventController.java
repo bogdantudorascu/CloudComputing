@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -46,14 +49,28 @@ public class CreateEventController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Get DB info from context
 		ServletContext ctx = request.getServletContext();
 		DBConnectionManager db = (DBConnectionManager) ctx.getAttribute("db");
 		Connection con = db.getConnection();
 		HttpSession session = request.getSession();
 		
+		// Get input paramter
 		String name =  request.getParameter("name");
 		String description = request.getParameter("description");
+		String dateStr = request.getParameter("date");
 		Part photo = request.getPart("photo");
+		
+		// Convert date (string) to date (java.sql.Date)
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = sf.parse(dateStr);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		java.sql.Date dateSql = new java.sql.Date(date.getTime());	
 		
 		String applicationPath = request.getServletContext().getRealPath("");
 		String fileName = photo.getSubmittedFileName();
@@ -64,12 +81,14 @@ public class CreateEventController extends HttpServlet {
         }
 		photo.write(filePath + File.separator + fileName);
 		System.out.println(filePath);
-		String query = "INSERT INTO event (name, description, photo) values (?, ?, ?)";
+		// Save event date to DB
+		String query = "INSERT INTO event (name, description, photo, date) values (?, ?, ?, ?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, name);
 			ps.setString(2, description);
 			ps.setString(3, fileName);
+			ps.setDate(4, dateSql);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

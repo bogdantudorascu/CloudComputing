@@ -14,22 +14,29 @@
 <div class="container my-3">
 	<main>
 		<h1>Create new event</h1>
-		<c:set var="path" value="${pageContext.request.contextPath}" />
-		<form method="POST" action="${path}/Create" enctype="multipart/form-data">
-		 	<div class="form-group">
-				<label for="name">Event name</label>
-		    	<input type="text" name="name" class="form-control" id="name" placeholder="Enter event name">
-		  	</div>
-		  	<div class="form-group">
-		    	<label for="description">Event description</label>
-		    	<textarea type="text" name="description" class="form-control" id="description" placeholder="Enter event description" rows="5"></textarea>
-		  	</div>
-		  	<div class="form-group">
-		    	<label for="photo">Recipe photo</label>
-		    	<input type="file" name="photo" class="form-control-file" id="photo" accept=".jpg, .jpeg, .png">
-		  	</div>
-		  	<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+		<div class="col-8">
+			<c:set var="path" value="${pageContext.request.contextPath}" />
+			<form method="POST" action="${path}/Create" enctype="multipart/form-data">
+			 	<div class="form-group">
+					<label for="name">Event name*</label>
+			    	<input type="text" name="name" class="form-control" id="name" placeholder="Enter event name" required>
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="description">Event description*</label>
+			    	<textarea type="text" name="description" class="form-control" id="description" placeholder="Enter event description" rows="5" required></textarea>
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="date">Event Date*</label>
+			    	<input type="date" name="date" class="form-control" id="date" required></input>
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="photo">Recipe photo*</label>
+			    	<input type="file" name="photo" class="form-control-file" id="photo" accept=".jpg, .jpeg, .png" required>
+			  	</div>
+			  	<p class="text-danger">*: required</p>
+			  	<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
 	</main>
 </div>
 </body>
