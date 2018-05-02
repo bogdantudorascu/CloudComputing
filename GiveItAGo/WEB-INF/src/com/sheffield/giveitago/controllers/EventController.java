@@ -35,11 +35,13 @@ public class EventController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Get db context and session data
 		ServletContext ctx = request.getServletContext();
 		DBConnectionManager db = (DBConnectionManager) ctx.getAttribute("db");
 		Connection con = db.getConnection();
 		HttpSession session = request.getSession();
-
+		
+		// Retrieve events from db
 		String applicationPath = request.getServletContext().getContextPath();
 		String filePath = applicationPath + '/' + (String) getServletContext().getInitParameter("uploadPath");
 		
@@ -57,7 +59,6 @@ public class EventController extends HttpServlet {
 				event.setDate(rs.getDate(7));
 				data.add(event);
 			}
-			
 			session.setAttribute("data", data);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,6 +68,7 @@ public class EventController extends HttpServlet {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(address);
 		dispatcher.forward(request, response);
 		session.removeAttribute("success");
+		
 	}	
 
 	/**

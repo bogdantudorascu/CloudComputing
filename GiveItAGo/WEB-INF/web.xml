@@ -13,6 +13,14 @@
     <servlet-name>ShowEventController</servlet-name>
     <servlet-class>com.sheffield.giveitago.controllers.ShowEventController</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>EditEventController</servlet-name>
+    <servlet-class>com.sheffield.giveitago.controllers.EditEventController</servlet-class>
+  </servlet>
+  <filter>
+  	<filter-name>AuthenticationFilter</filter-name>
+  	<filter-class>com.sheffield.giveitago.filters.AuthenticationFilter</filter-class>
+  </filter>
   <servlet-mapping>
     <servlet-name>EventController</servlet-name>
     <url-pattern></url-pattern>
@@ -21,25 +29,37 @@
     <servlet-name>CreateEventController</servlet-name>
     <url-pattern>/Create</url-pattern>
   </servlet-mapping>
-   <servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EditEventController</servlet-name>
+    <url-pattern>/Edit/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>ShowEventController</servlet-name>
     <url-pattern>/Event/*</url-pattern>
   </servlet-mapping>
-  
+  <filter-mapping>
+  	<filter-name>AuthenticationFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  	<dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+  <error-page>
+    <location>/error.jsp</location>
+  </error-page>
   <listener>
     <listener-class>com.sheffield.giveitago.listener.AppContextListener</listener-class>
   </listener>
+
   <context-param>
     <param-name>dbUser</param-name>
-    <param-value>root</param-value>
+    <param-value>user1</param-value>
   </context-param>
   <context-param>
     <param-name>dbPass</param-name>
-    <param-value>mysql</param-value>
+    <param-value>12345</param-value>
   </context-param>
   <context-param>
     <param-name>dbURL</param-name>
-    <param-value>jdbc:mysql://localhost:3306/cloud</param-value>
+    <param-value>jdbc:mysql://localhost:3306/giveitago</param-value>
   </context-param>
   <context-param>
     <param-name>uploadPath</param-name>
