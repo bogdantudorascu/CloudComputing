@@ -18,6 +18,7 @@
 			<p>${success}</p>
 		</c:if>
 		<h1>Event Page</h1>
+		<h1>${username}</h1>
 		<c:choose>
 			<c:when test="${not empty data}">
 				<c:forEach items="${data}" var="event">

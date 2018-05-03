@@ -23,7 +23,7 @@
 					<div class="col-8">
 						<h2>${data.name}</h2>
 						<h4 class="mb-2 text-muted">Event date: <fmt:formatDate pattern="dd/MM/yyyy" value="${data.date}" /></h3>
-						<p class="event-description">${data.description}</p>
+						<p>${data.description}</p>
 					</div>
 				</div>
 			</c:otherwise>
