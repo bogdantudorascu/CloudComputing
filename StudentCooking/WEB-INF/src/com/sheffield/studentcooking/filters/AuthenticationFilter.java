@@ -1,4 +1,4 @@
-package com.sheffield.giveitago.filters;
+package com.sheffield.studentcooking.filters;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -43,10 +43,8 @@ public class AuthenticationFilter implements Filter {
 			res.sendRedirect("/CloudComputing");
 		} else {
 			// pass the request along the filter chain
-			chain.doFilter(request, response);
-			
+			chain.doFilter(request, response);	
 		}
-
 	}
 
 	/**

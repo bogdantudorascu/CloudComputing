@@ -22,8 +22,9 @@
 					<div class="col-4"><img src="${data.photo}" class="img-fluild img-thumbnail event-img" alt="event-image"></div>
 					<div class="col-8">
 						<h2>${data.name}</h2>
-						<h4 class="mb-2 text-muted">Event date: <fmt:formatDate pattern="dd/MM/yyyy" value="${data.date}" /></h3>
-						<p>${data.description}</p>
+						<h4 class="mb-2 text-muted">Event date: <fmt:formatDate pattern="dd/MM/yyyy" value="${data.date}" /></h4>
+						<p class="event-description">${data.description}</p>
+						<a class="btn btn-danger" href="/GiveItAGo/Edit/${data.id}">Edit event</a>
 					</div>
 				</div>
 			</c:otherwise>

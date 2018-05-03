@@ -41,6 +41,9 @@
   	<filter-name>AuthenticationFilter</filter-name>
   	<url-pattern>/*</url-pattern>
   	<dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
   </filter-mapping>
   <error-page>
     <location>/error.jsp</location>

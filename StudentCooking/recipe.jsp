@@ -22,9 +22,12 @@
 				<div class="col-8">
 					<h2>${data.name}</h2>
 					<h4 class="mb-2 text-muted">Cooking time: ${data.time}</h4>
-					<p>${data.description}</p>
 					<a class="btn btn-danger" href="/StudentCooking/Edit/${data.id}">Edit</a>
 				</div>
+			</div>
+			<div class="row my-3 cooking-detail">
+				<h4>Cooking Instructions</h4>
+				<p class="cooking-description">${data.description}</p>
 			</div>
 		</c:otherwise>
 	</c:choose>

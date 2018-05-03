@@ -1,6 +1,5 @@
-package com.sheffield.giveitago.controllers;
+package com.sheffield.studentcooking.controllers;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,20 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sheffield.giveitago.beans.EventBean;
-import com.sheffield.giveitago.db.DBConnectionManager;
+import com.sheffield.studentcooking.beans.RecipeBean;
+import com.sheffield.studentcooking.db.DBConnectionManager;
 
 /**
  * Servlet implementation class ShowEventController
  */
 
 @SuppressWarnings("serial")
-public class ShowEventController extends HttpServlet {
+public class ShowRecipeController extends HttpServlet {
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowEventController() {
+    public ShowRecipeController() {
         super();
     }
 
@@ -41,38 +40,39 @@ public class ShowEventController extends HttpServlet {
 		Connection con = db.getConnection();
 		HttpSession session = request.getSession();
 		
+		// Retrieve upload path
 		String applicationPath = request.getServletContext().getContextPath();
 		String filePath = applicationPath + '/' + (String) getServletContext().getInitParameter("uploadPath");
 		
+		// Get recipe id from url;
 		String id = request.getPathInfo().substring(1);
 		if (isInt(id) == true) {
-			String query = "SELECT * FROM event WHERE id=?";
+			String query = "SELECT * FROM recipes WHERE id=?";
 			try {
-				EventBean event = new EventBean();
+				RecipeBean recipe = new RecipeBean();
 				PreparedStatement ps = con.prepareStatement(query);
 				ps.setString(1, id);
 				ResultSet rs = ps.executeQuery();
 				if (rs.next()) {
 					do {
-						event.setId(rs.getInt(1));
-						event.setName(rs.getString(2));
-						event.setDescription(rs.getString(3));
-						event.setPhoto(filePath + "/" + rs.getString(4));
-						event.setDate(rs.getDate(7));
+						recipe.setId(rs.getInt(1));
+						recipe.setName(rs.getString(2));
+						recipe.setDescription(rs.getString(3));
+						recipe.setTime(rs.getString(4));
+						recipe.setPhoto(filePath + "/" + rs.getString(5));
 					} while (rs.next());
-					System.out.println(event.getDate());
-					session.setAttribute("data", event);
+					session.setAttribute("data", recipe);
 				} else {
-					session.setAttribute("error", "Event not found!");
+					session.setAttribute("error", "Recipe not found!");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		} else {
-			session.setAttribute("error", "Invalid event ID!");
+			session.setAttribute("error", "Invalid recipe ID!");
 		}
 
-		String address = "/event.jsp";
+		String address = "/recipe.jsp";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(address);
 		dispatcher.forward(request, response);
 		session.removeAttribute("error");
