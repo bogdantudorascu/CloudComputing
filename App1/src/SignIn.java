@@ -8,7 +8,7 @@ public class SignIn extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		response.sendRedirect(Constants.ROOT_URL);
+		response.sendRedirect("index.jsp");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -24,7 +24,7 @@ public class SignIn extends HttpServlet {
 	        try {
 	            String email = request.getParameter("email");
 	            String originalPassword = request.getParameter("password");
-	            String databasePassword = null, databaseUsername = null, databasePeanuts = null, databaseId = null, databaseRole = null;
+	            String databasePassword = null, databaseUsername = null, databasePeanuts = null, databaseId = null;
 	
 	
 	            String sql = "SELECT * FROM users WHERE email = ?";
@@ -40,23 +40,21 @@ public class SignIn extends HttpServlet {
 	            	databaseUsername = rs.getString("username");
 	                databasePassword = rs.getString("password");
 	                databasePeanuts = rs.getString("peanuts");
-	                databaseRole = rs.getString("role");
 	            }
 	            
 	
 	
 	            if(BCrypt.checkpw(originalPassword, databasePassword)){
 	            	session.setAttribute("id", databaseId);
-	            	session.setAttribute("role", databaseRole);
 	            	session.setAttribute("username", databaseUsername);
 	            	session.setAttribute("peanuts", databasePeanuts);
 	            	
 	            	request.setAttribute("success", "You have logged in successfully!");
-	            	RequestDispatcher rd = request.getRequestDispatcher("/");
+	            	RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 	            	rd.forward(request, response);
 	            } else {
 	            	request.setAttribute("error", "Invalid credentials!");
-	            	RequestDispatcher rd = request.getRequestDispatcher("/");
+	            	RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 	            	rd.forward(request, response);
 	            }
 	            

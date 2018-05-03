@@ -60,15 +60,3 @@ body, html {
 .profile-status {
 	color: white;
 }
-
-.add-app-form {
-	display: none;
-}
-
-.red-row {
-	background-color: #ffd7d3;
-}
-
-.green-row {
-	background-color: #cbe5c9;
-}

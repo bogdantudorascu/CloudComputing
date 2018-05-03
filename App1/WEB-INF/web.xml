@@ -37,27 +37,6 @@
 		<servlet-class>Profile</servlet-class>
 	</servlet>
 	
-	<servlet>
-		<servlet-name>CreateApp</servlet-name>
-		<servlet-class>CreateApp</servlet-class>
-	</servlet>
-	
-	
-	<servlet>
-		<servlet-name>RemoveApp</servlet-name>
-		<servlet-class>RemoveApp</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>OpenApp</servlet-name>
-		<servlet-class>OpenApp</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>ChangePassword</servlet-name>
-		<servlet-class>ChangePassword</servlet-class>
-	</servlet>
-		
 	
 	
 	
@@ -68,11 +47,6 @@
 	<servlet-mapping>
 		<servlet-name>Index</servlet-name>
 		<url-pattern></url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>Index</servlet-name>
-		<url-pattern>/Index</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
@@ -95,26 +69,6 @@
 		<url-pattern>/Profile</url-pattern>
 	</servlet-mapping>
 	
-	<servlet-mapping>
-		<servlet-name>CreateApp</servlet-name>
-		<url-pattern>/CreateApp</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>RemoveApp</servlet-name>
-		<url-pattern>/RemoveApp</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>OpenApp</servlet-name>
-		<url-pattern>/OpenApp</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>ChangePassword</servlet-name>
-		<url-pattern>/ChangePassword</url-pattern>
-	</servlet-mapping>
-	
 	
 	
 	
@@ -123,6 +77,8 @@
     <error-code>404</error-code>
     <location>/error.jsp</location>
 	</error-page>
+	
+	
 
 </web-app>
  

@@ -4,64 +4,51 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class SignUp extends HttpServlet {
-	
+public class RemoveApp extends HttpServlet {
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if(session.getAttribute("username") != null) {
-			request.setAttribute("error", "You already have an account!");
-	     	RequestDispatcher rd = request.getRequestDispatcher("/Index");
-	     	rd.forward(request, response);
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
-	    	rd.forward(request, response);
-    	}
+		response.sendRedirect(Constants.ROOT_URL);
     }
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		Connection conn = null;
-		PreparedStatement ps = null;
-        try {
-            String email = request.getParameter("email");
-            String username = request.getParameter("username");
-            String originalPassword = request.getParameter("password");
-            
-            String securedPassword = BCrypt.hashpw(originalPassword, BCrypt.gensalt(12));
-            
-            System.out.println("Length is"+securedPassword.length());
+		
+			Connection conn = null;
+			PreparedStatement ps = null;
+			
+		try {
+			String id = request.getParameter("id");
+			String name = request.getParameter("name");
+			
+			String sql = " DELETE FROM apps WHERE id = ?";
 
-            String sql = "INSERT INTO users(email,username,password) VALUES (?,?,?)";
             Class.forName("com.mysql.jdbc.Driver");
 
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud","root","mysql");
             ps = conn.prepareStatement(sql);
-            ps.setString(1,email);
-            ps.setString(2,username);
-            ps.setString(3,securedPassword);
+            ps.setString(1,id);
+            
             int success = ps.executeUpdate();
             
             if(success>0) {
-            	request.setAttribute("success", "You have registered successfully!");
-            	RequestDispatcher rd = request.getRequestDispatcher("/signup.jsp");
+            	request.setAttribute("success", "You have deleted *"+name+"* from the dashboard!");
+            	RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             	rd.forward(request, response);
             } else {
-            	request.setAttribute("error", "There was a problem with your registration!");
-            	request.setAttribute("username", username);
-            	request.setAttribute("email", email);
-            	request.setAttribute("password", originalPassword);
-            	RequestDispatcher rd = request.getRequestDispatcher("/signup.jsp");
+            	request.setAttribute("error", "There was a problem with your request!");
+            	RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             	rd.forward(request, response);
             }
+        	
         }catch(SQLException se){
             //Handle errors for JDBC
             se.printStackTrace();
@@ -82,8 +69,8 @@ public class SignUp extends HttpServlet {
                se.printStackTrace();
             }//end finally try
          }
-
-
+			
+		
+	
     }
-
 }

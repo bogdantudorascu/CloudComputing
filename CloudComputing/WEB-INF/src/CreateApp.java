@@ -4,64 +4,65 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class SignUp extends HttpServlet {
+public class CreateApp extends HttpServlet {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if(session.getAttribute("username") != null) {
-			request.setAttribute("error", "You already have an account!");
-	     	RequestDispatcher rd = request.getRequestDispatcher("/Index");
-	     	rd.forward(request, response);
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
-	    	rd.forward(request, response);
-    	}
+		response.sendRedirect(Constants.ROOT_URL);
     }
-	
+
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		Connection conn = null;
-		PreparedStatement ps = null;
-        try {
-            String email = request.getParameter("email");
-            String username = request.getParameter("username");
-            String originalPassword = request.getParameter("password");
-            
-            String securedPassword = BCrypt.hashpw(originalPassword, BCrypt.gensalt(12));
-            
-            System.out.println("Length is"+securedPassword.length());
+		
+			Connection conn = null;
+			PreparedStatement ps = null;
+			
+		try {
+			String name = request.getParameter("name");
+			String img = request.getParameter("img");
+			String url = request.getParameter("url");
+			String description = request.getParameter("description");
+			String price = request.getParameter("price");
+			String folder_name = request.getParameter("folder_name");
+			String developer = request.getParameter("developer");
+			String salary = request.getParameter("salary");
+			
+			String sql = "INSERT INTO apps(name,url,img,description,price,folder_name,developer,salary) VALUES (?,?,?,?,?,?,?,?)";
 
-            String sql = "INSERT INTO users(email,username,password) VALUES (?,?,?)";
             Class.forName("com.mysql.jdbc.Driver");
 
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud","root","mysql");
             ps = conn.prepareStatement(sql);
-            ps.setString(1,email);
-            ps.setString(2,username);
-            ps.setString(3,securedPassword);
+            ps.setString(1,name);
+            ps.setString(2,url);
+            ps.setString(3,img);
+            ps.setString(4,description);
+            ps.setString(5,price);
+            ps.setString(6,folder_name);
+            ps.setString(7,developer);
+            ps.setString(8,salary);
+            
             int success = ps.executeUpdate();
             
             if(success>0) {
-            	request.setAttribute("success", "You have registered successfully!");
-            	RequestDispatcher rd = request.getRequestDispatcher("/signup.jsp");
+            	request.setAttribute("success", "You have added a new app!");
+            	RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             	rd.forward(request, response);
             } else {
-            	request.setAttribute("error", "There was a problem with your registration!");
-            	request.setAttribute("username", username);
-            	request.setAttribute("email", email);
-            	request.setAttribute("password", originalPassword);
-            	RequestDispatcher rd = request.getRequestDispatcher("/signup.jsp");
+            	request.setAttribute("error", "There was a problem with your submit!");
+            	RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             	rd.forward(request, response);
             }
+        	
         }catch(SQLException se){
             //Handle errors for JDBC
             se.printStackTrace();
@@ -82,8 +83,8 @@ public class SignUp extends HttpServlet {
                se.printStackTrace();
             }//end finally try
          }
-
-
+			
+		
+	
     }
-
 }

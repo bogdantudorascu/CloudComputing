@@ -41,16 +41,16 @@
    	</div>
    
    <div class="container">
-     <form action="Profile" method="POST">
+     <form action="ChangePassword" method="POST">
 	  
 	  <div class="form-group">
 		<label for="exampleInputPassword2">New Password</label>
-		<input type="password" name="new-password" class="form-control" id="exampleInputPassword2" placeholder="New Password">
+		<input type="password" name="new-password" class="form-control" id="exampleInputPassword2" required placeholder="New Password">
 	  </div>
 	  
 	  <div class="form-group">
 		<label for="exampleInputPassword3">Confirm Password</label>
-		<input type="password" name="confirm-password" class="form-control" id="exampleInputPassword3" placeholder="Confirm Password">
+		<input type="password" name="confirm-password" class="form-control" id="exampleInputPassword3" required placeholder="Confirm Password">
 	  </div>
 	  <button type="submit" class="btn btn-primary">Submit</button>
 	</form>
@@ -73,6 +73,7 @@ ArrayList<ArrayList<String>> rs = new  ArrayList<ArrayList<String>>();
    <table class="table">
 	<thead>
       <tr>
+      	<th>App</th>
         <th>Amount</th>
         <th>Deduct</th>
         <th>Before</th>
@@ -81,12 +82,26 @@ ArrayList<ArrayList<String>> rs = new  ArrayList<ArrayList<String>>();
       </tr>
     </thead>
     <tbody>
-	<%for(int i=0; i<rs.size(); i++){%> 
-   	 <tr>
-   	 	<% ArrayList<String> row = (ArrayList<String>) rs.get(i);
+	<%for(int i=0; i<rs.size(); i++){
+	ArrayList<String> row = (ArrayList<String>) rs.get(i);
+		if( Integer.parseInt(row.get(2)) == 0) { %> 
+   	 <tr class="green-row">
+   	 	<% } else { %>
+   	 <tr class="red-row">
+   		 <% }
    		 for(int j=0; j < row.size(); j++){ %>
-        	<td><%= row.get(j) %></td>
+   		 	<% if( j == 2 ) { %> 
+		   	 	<% if( Integer.parseInt(row.get(j)) == 0) { %> 
+				   	 <td>Added</td>
+				   	 	<% } else { %>
+				   	 <td>Deducted</td>
+				   <% } %>
+		   	 	<% } else { %>
+		   	 <td><%= row.get(j) %></td>
+		   	<% } %>
+        	
 		<% } %>
+	</tr>
 	<% } %>
 	 </tbody>
   </table>

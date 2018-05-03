@@ -1,20 +1,19 @@
 $( document ).ready(function() {
-	$(".signin-form").submit(function (e) {
-	    var email = $("#email").val();
-	    var password = $("#password").val();
-	    var dataString = 'email=' + email + '&password=' + password;
-
-	    
-	    $.ajax({
-            type: "POST",
-            url: "SignIn",
-            data: dataString,
-            success: function () {
-             console.log("submited");   
-            }
-        });
-	
-	    return false;
-	});
+	$("#create-app-button").on("click", function() {
+		console.log("does it find element");
+		if ($("#create-app-button").hasClass("hidden-form")) {
+			$("#create-app-button").removeClass("hidden-form");
+			$("#create-app-button").html("Hide form");
+			$(".add-app-form").show();
+			$(".apps").hide();
+		} else {
+			$("#create-app-button").html("Show form");
+			$(".add-app-form").hide();
+			$(".apps").show();
+			$("#create-app-button").addClass("hidden-form");
+		}
+	})
 
 });
+
+
