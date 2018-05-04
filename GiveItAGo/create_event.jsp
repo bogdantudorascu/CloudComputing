@@ -30,7 +30,7 @@
 			    	<input type="date" name="date" class="form-control" id="date" required></input>
 			  	</div>
 			  	<div class="form-group">
-			    	<label for="photo">Recipe photo*</label>
+			    	<label for="photo">Event photo*</label>
 			    	<input type="file" name="photo" class="form-control-file" id="photo" accept=".jpg, .jpeg, .png" required>
 			  	</div>
 			  	<p class="text-danger">*: required</p>
