@@ -40,7 +40,7 @@ public class AuthenticationFilter implements Filter {
 		String usernameCtx = (String)this.context.getAttribute("username");
 		// Request is invalid if no username attribute in Context or there is no session or no username attribute in session
 		if (usernameCtx == null) {
-			res.sendRedirect("/CloudComputing");
+			res.sendRedirect("/CloudBase");
 		} else {
 			// pass the request along the filter chain
 			chain.doFilter(request, response);
