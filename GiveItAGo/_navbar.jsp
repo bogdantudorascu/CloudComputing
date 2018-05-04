@@ -18,7 +18,7 @@
 			    <% if(getServletContext().getAttribute("username") != null) { %>
 				    <ul class="navbar-nav">
 				    	<li class="nav-item">
-				    		<a class="nav-link" href="/CloudComputing">Back to Cloud Platform</a>
+				    		<a class="nav-link" href="/CloudBase">Back to Cloud Platform</a>
 				    	</li>
 				    </ul>
 			    <% } %>
