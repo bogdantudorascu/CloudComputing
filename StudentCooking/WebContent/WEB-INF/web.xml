@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Student Cooking</display-name>
+  <servlet>
+    <servlet-name>RecipeController</servlet-name>
+    <servlet-class>com.sheffield.studentcooking.controllers.RecipeController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CreateRecipeController</servlet-name>
+    <servlet-class>com.sheffield.studentcooking.controllers.CreateRecipeController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowRecipeController</servlet-name>
+    <servlet-class>com.sheffield.studentcooking.controllers.ShowRecipeController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>EditRecipeController</servlet-name>
+    <servlet-class>com.sheffield.studentcooking.controllers.EditRecipeController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>RecipeController</servlet-name>
+    <url-pattern></url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CreateRecipeController</servlet-name>
+    <url-pattern>/Create</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EditRecipeController</servlet-name>
+    <url-pattern>/Edit/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowRecipeController</servlet-name>
+    <url-pattern>/Recipe/*</url-pattern>
+  </servlet-mapping>
+  
+  
+  <listener>
+    <listener-class>com.sheffield.studentcooking.listener.AppContextListener</listener-class>
+  </listener>
+
+  <filter>
+  	<filter-name>AuthenticationFilter</filter-name>
+  	<filter-class>com.sheffield.studentcooking.filters.AuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>AuthenticationFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  	<dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+  </filter-mapping>
+  
+  <context-param>
+    <param-name>dbUser</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbPass</param-name>
+    <param-value>mysql</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbURL</param-name>
+    <param-value>jdbc:mysql://localhost:3306/cloud</param-value>
+  </context-param>
+  <context-param>
+    <param-name>uploadPath</param-name>
+    <param-value>upload</param-value>
+  </context-param>
+  
+  <error-page>
+    <location>/error.jsp</location>
+  </error-page>
+</web-app>
